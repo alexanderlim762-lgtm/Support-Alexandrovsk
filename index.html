@@ -83,6 +83,39 @@
             background-color: #eee;
             font-size: 14px;
         }
+        /* Кнопка чата */
+#chatButton {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    transition: transform 0.2s;
+    z-index: 1000;
+}
+
+#chatButton:hover {
+    transform: scale(1.1);
+}
+
+#chatButton img {
+    width: 35px;
+    height: 35px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #eee;
+    font-size: 14px;
+}
     </style>
 </head>
 <body>
@@ -120,6 +153,15 @@
             </ul>
         </section>
     </main>
+   <!-- Кнопка чат-бота -->
+<div id="chatButton" onclick="openBot()">
+    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384057.png" alt="Чат-бот">
+</div>
+    <script>
+function openBot() {
+    window.location.href = "bot.html"; // Переход к странице бота
+}
+</script>
 
     <footer>
         &copy; 2026 Help Center. Все права защищены.
