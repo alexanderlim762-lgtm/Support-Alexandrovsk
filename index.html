@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Центр поддержки — Архивы ААО</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Основные стили в стиле Архивов ААО */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Шапка поддержки */
+        header {
+            background: linear-gradient(135deg, #1e293b 0%, #3b82f6 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        nav {
+            margin-top: 20px;
+        }
+
+        nav a {
+            margin: 0 15px;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        /* Контент */
+        main {
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #1e293b;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        section {
+            background-color: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border: 1px solid #f1f5f9;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        /* Ссылки на статьи */
+        a.article-link {
+            display: block;
+            text-decoration: none;
+            padding: 18px;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            color: #334155;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        a.article-link:hover {
+            background-color: #eff6ff;
+            border-color: #3b82f6;
+            color: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        /* Кнопка чата */
+        #chatButton {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 65px;
+            height: 65px;
+            background: #3b82f6;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+            transition: transform 0.2s, background 0.3s;
+            z-index: 1000;
+        }
+
+        #chatButton:hover {
+            transform: scale(1.05);
+            background: #2563eb;
+        }
+
+        #chatButton img {
+            width: 30px;
+            height: 30px;
+            filter: brightness(0) invert(1); /* Делаем иконку белой */
+        }
+
+        /* Футер */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #1e293b;
+            color: #94a3b8;
+            font-size: 14px;
+            margin-top: 50px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.6rem; }
+            nav a { display: block; margin: 10px 0; }
+            section { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Техническая поддержка</h1>
+        <nav>
+            <a href="#community">Сообщество</a>
+            <a href="#faq">База знаний</a>
+            <a href="#help">Решение проблем</a>
+            <a href="index.html">На главную</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="community">
+            <h2>👥 Сообщество</h2>
+            <ul>
+                <li><a href="rules.html" class="article-link">Правила поведения в ААО</a></li>
+                <li><a href="collaboration.html" class="article-link">Сотрудничество и реклама</a></li>
+            </ul>
+        </section>
+
+        <section id="faq">
+            <h2>❓ Часто задаваемые вопросы</h2>
+            <ul>
+                <li><a href="new_video.html" class="article-link">График выхода новых видеоматериалов</a></li>
+                <li><a href="#" class="article-link">Как пользоваться цифровым архивом?</a></li>
+            </ul>
+        </section>
+
+        <section id="help">
+            <h2>🛠️ Помощь и модерация</h2>
+            <ul>
+                <li><a href="report_comment.html" class="article-link">Жалоба на нарушение в комментариях</a></li>
+                <li><a href="restore_comment.html" class="article-link">Апелляция: как разблокировать комментарий?</a></li>
+            </ul>
+        </section>
+    </main>
+
+   <script src="https://bot.jaicp.com/chatwidget/JrRspotl:8f73882b551bcc44d764370a35b96c89dc62d39b/justwidget.js" async></script>
+
+
+    <footer>
+        &copy; 2026 Архивы Александровского АО | Help Center<br>
+        Все права защищены.
+    </footer>
+
+</body>
+</html>

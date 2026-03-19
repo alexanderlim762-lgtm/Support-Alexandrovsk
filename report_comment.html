@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подать жалобу — Архивы Александровского АО</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8fafc;
+            margin: 0;
+            padding: 0;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* Шапка страницы */
+        header {
+            background: #1e293b;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 4px solid #ef4444; /* Красный акцент для темы нарушений */
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Основной контейнер */
+        main {
+            max-width: 800px;
+            margin: 40px auto;
+            background: white;
+            padding: 45px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: #475569;
+            text-align: justify;
+        }
+
+        /* Список требований */
+        .report-list {
+            background: #f1f5f9;
+            padding: 30px 30px 30px 50px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .report-list li {
+            margin-bottom: 15px;
+            color: #334155;
+        }
+
+        .report-list li strong {
+            color: #1e293b;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        /* Блок важного примечания */
+        .important-note {
+            background-color: #eff6ff;
+            border-left: 5px solid #3b82f6;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 4px;
+            color: #1e40af;
+        }
+
+        /* Критическое предупреждение (Красное) */
+        .critical-warning {
+            background-color: #fef2f2;
+            border: 1px solid #fee2e2;
+            padding: 20px;
+            border-radius: 12px;
+            color: #b91c1c;
+            text-align: center;
+            font-weight: 600;
+            margin-top: 30px;
+        }
+
+        .critical-warning span {
+            display: block;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* Ссылка назад */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 40px;
+            text-decoration: none;
+            color: #3b82f6;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #1d4ed8;
+            text-decoration: underline;
+        }
+
+        /* Футер */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: #1e293b;
+            color: #94a3b8;
+            font-size: 14px;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 600px) {
+            main { margin: 20px; padding: 25px; }
+            header h1 { font-size: 1.4rem; }
+            .report-list { padding: 20px 20px 20px 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Протокол подачи жалобы</h1>
+    </header>
+
+    <main>
+        <p>Если вы столкнулись с нарушением правил сообщества со стороны другого пользователя, модерация «Архивов ААО» готова принять меры. Для оперативного рассмотрения инцидента ваша заявка должна содержать следующие данные:</p>
+
+        <ol class="report-list">
+            <li>
+                <strong>Никнейм нарушителя</strong>
+                Точное имя пользователя, как оно отображается в профиле.
+            </li>
+            <li>
+                <strong>Идентификатор (ID)</strong>
+                Уникальный ID пользователя (если доступен в профиле).
+            </li>
+            <li>
+                <strong>Суть нарушения</strong>
+                Подробное описание произошедшего: мат, спам, оскорбления или дезинформация.
+            </li>
+            <li>
+                <strong>Доказательная база</strong>
+                Прямые ссылки на комментарий, скриншоты или фрагменты видео.
+            </li>
+        </ol>
+
+        <div class="important-note">
+            <strong>Важно:</strong> Жалобы принимаются <strong>строго</strong> через официальную форму обратной связи или чат-бота. Сообщения о нарушениях, оставленные в комментариях под видео, не рассматриваются модераторами.
+        </div>
+
+        <p>Вы также можете использовать нашего автоматизированного помощника (бота), если это предусмотрено функционалом текущей версии сайта поддержки.</p>
+         
+        <div class="critical-warning">
+            <span>🚫</span>
+            Внимание: без наличия скриншотов или видеодоказательств с указанием ссылки на видео, модерация не сможет подтвердить факт нарушения и принять меры к пользователю.
+        </div>
+
+        <a href="index.html" class="back-link">← Вернуться в Центр помощи</a>
+    </main>
+    <script src="https://bot.jaicp.com/chatwidget/JrRspotl:8f73882b551bcc44d764370a35b96c89dc62d39b/justwidget.js" async></script>
+
+    <footer>
+        &copy; 2026 Архивы Александровского АО | Отдел модерации контента
+    </footer>
+
+</body>
+</html>
