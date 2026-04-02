@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форум поддержки — Архивы ААО</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { --primary: #3b82f6; --dark: #1e293b; --bg: #f8fafc; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg); margin: 0; color: #334155; }
+
+        .forum-header {
+            background: linear-gradient(135deg, var(--dark) 0%, #334155 100%);
+            color: white; padding: 60px 20px; text-align: center; position: relative;
+        }
+
+        .container { max-width: 1000px; margin: -40px auto 50px; padding: 0 20px; }
+
+        .forum-card {
+            background: white; border-radius: 24px; padding: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .forum-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+
+        .btn-create {
+            background: var(--primary); color: white; padding: 14px 28px;
+            border-radius: 14px; border: none; cursor: pointer; font-weight: 700; transition: 0.3s;
+        }
+
+        .btn-create:hover { background: #2563eb; transform: translateY(-2px); }
+
+        /* Модальное окно */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); z-index: 9999;
+            align-items: center; justify-content: center;
+        }
+
+        .modal-content {
+            background: white; width: 90%; max-width: 500px; padding: 40px;
+            border-radius: 28px; position: relative; animation: modalAnim 0.4s ease-out;
+        }
+
+        @keyframes modalAnim { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        .form-group { margin-bottom: 15px; text-align: left; }
+        .form-group label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 8px; color: var(--dark); }
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 14px; border: 1.5px solid #e2e8f0; border-radius: 12px;
+            font-family: 'Montserrat'; box-sizing: border-box; font-size: 14px;
+        }
+
+        .btn-submit {
+            width: 100%; padding: 16px; background: var(--primary); color: white;
+            border: none; border-radius: 12px; font-weight: 700; cursor: pointer; margin-top: 10px;
+        }
+
+        .close { position: absolute; top: 20px; right: 20px; font-size: 24px; cursor: pointer; color: #94a3b8; }
+
+        /* Анимация уведомления */
+        @keyframes slideIn { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <header class="forum-header">
+        <h1>Служба поддержки ААО</h1>
+        <p>Архивы Александровского АО — Форум</p>
+    </header>
+
+    <div class="container">
+        <div class="forum-card">
+            <div class="forum-top">
+                <h2>Обсуждения</h2>
+                <button class="btn-create" onclick="openModal()">+ Создать тему</button>
+            </div>
+            <div id="topicsList">
+                <p style="color:#94a3b8; text-align:center;">Пока здесь нет тем. Станьте первым!</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 style="margin-top:0">Новая тема</h2>
+            <form id="forumForm">
+                <div class="form-group">
+                    <label>Никнейм YouTube (обязательно)</label>
+                    <input type="text" id="yt_nick" placeholder="Ваш ник" required>
+                </div>
+                <div class="form-group">
+                    <label>Ваша эл. почта (обязательно для ответа)</label>
+                    <input type="email" id="user_email" placeholder="example@mail.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Название темы (обязательно)</label>
+                    <input type="text" id="topic_title" placeholder="Суть вопроса" required>
+                </div>
+                <div class="form-group">
+                    <label>Описание темы (обязательно)</label>
+                    <textarea id="topic_desc" rows="4" placeholder="Опишите проблему..." required></textarea>
+                </div>
+                <button type="submit" class="btn-submit" id="submitBtn">ОТПРАВИТЬ</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function(){ emailjs.init("JWSQbjgGfa9-P-rfq"); })(); // Ваш Public Key
+
+        function openModal() { document.getElementById('modal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('modal').style.display = 'none'; }
+
+        document.getElementById('forumForm').onsubmit = function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const emailValue = document.getElementById('user_email').value;
+
+            btn.innerText = "ОТПРАВКА...";
+            btn.disabled = true;
+
+            const params = {
+                to_email: 'alexanderlim762@gmail.com',
+                reply_to: emailValue, // Важно для автоответа!
+                from_name: document.getElementById('yt_nick').value,
+                subject: document.getElementById('topic_title').value,
+                message: document.getElementById('topic_desc').value
+            };
+
+            // Используем ваш Service ID
+            emailjs.send('service_30yvfar', 'template_id_vash', params)
+                .then(() => {
+                    closeModal();
+                    showBotSuccess();
+                    document.getElementById('forumForm').reset();
+                })
+                .catch(err => alert("Ошибка! Проверьте ID шаблона в EmailJS."))
+                .finally(() => {
+                    btn.innerText = "ОТПРАВИТЬ";
+                    btn.disabled = false;
+                });
+        };
+
+        function showBotSuccess() {
+            const notify = document.createElement('div');
+            notify.style = `
+                position: fixed; bottom: 20px; left: 20px; 
+                background: #1e293b; color: white; padding: 25px; 
+                border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+                z-index: 10000; font-family: 'Montserrat'; border-left: 6px solid #3b82f6;
+                max-width: 350px; animation: slideIn 0.5s ease-out;
+            `;
+            notify.innerHTML = `
+                <div style="font-weight:700; color:#3b82f6; margin-bottom:8px;">✉️ СЛУЖБА ПОДДЕРЖКИ</div>
+                <div style="font-size:14px;">
+                    Привет, подписчик! Рад, что ты связался с нами. Твоя тема принята.<br><br>
+                    Проверь почту — <strong>botalexandrovsksupport@gmail.com</strong> уже отправил тебе ответ.
+                </div>
+                <div style="margin-top:15px; font-size:12px; font-weight:600; opacity:0.7;">
+                    С уважением,<br>Александровск
+                </div>
+            `;
+            document.body.appendChild(notify);
+            setTimeout(() => { notify.style.opacity='0'; setTimeout(()=>notify.remove(), 500); }, 10000);
+        }
+    </script>
+</body>
+</html>
+
