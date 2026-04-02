@@ -31,7 +31,6 @@
 
         .btn-create:hover { background: #2563eb; transform: translateY(-2px); }
 
-        /* Модальное окно */
         .modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); z-index: 9999;
@@ -59,7 +58,6 @@
 
         .close { position: absolute; top: 20px; right: 20px; font-size: 24px; cursor: pointer; color: #94a3b8; }
 
-        /* Анимация уведомления бота */
         @keyframes slideIn { from { transform: translateX(-110%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
     </style>
 </head>
@@ -94,26 +92,27 @@
                     <input type="text" id="yt_nick" placeholder="Ваш ник" required>
                 </div>
                 <div class="form-group">
-                    <label>Ваша эл. почта (обязательно для ответа)</label>
+                    <label>Ваша эл. почта (для ответа бота)</label>
                     <input type="email" id="user_email" placeholder="example@mail.com" required>
                 </div>
                 <div class="form-group">
-                    <label>Название темы (обязательно)</label>
+                    <label>Название темы</label>
                     <input type="text" id="topic_title" placeholder="Суть вопроса" required>
                 </div>
                 <div class="form-group">
-                    <label>Описание темы (обязательно)</label>
+                    <label>Описание проблемы</label>
                     <textarea id="topic_desc" rows="4" placeholder="Опишите проблему..." required></textarea>
                 </div>
-                <button type="submit" class="btn-submit" id="submitBtn">ОТПРАВИТЬ ТЕМУ</button>
+                <button type="submit" class="btn-submit" id="submitBtn">ОТПРАВИТЬ</button>
             </form>
         </div>
     </div>
 
-    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
-        // Инициализация твоим ключом
-        (function(){ emailjs.init("JWSQbjgGfa9-P-rfq"); })();
+        (function(){
+            emailjs.init({ publicKey: "JWSQbjgGfa9-P-rfq" });
+        })();
 
         function openModal() { document.getElementById('modal').style.display = 'flex'; }
         function closeModal() { document.getElementById('modal').style.display = 'none'; }
@@ -126,33 +125,29 @@
             btn.innerText = "ОТПРАВКА...";
             btn.disabled = true;
 
-            // Сопоставляем поля с твоим шаблоном
             const params = {
                 name: document.getElementById('yt_nick').value,     
                 email: userEmail, 
+                reply_to: userEmail, // Бот ответит на этот адрес
                 title: document.getElementById('topic_title').value, 
                 message: document.getElementById('topic_desc').value 
             };
 
-            // service_30yvfar — твой сервис
-            // template_yn8ritn — твой правильный шаблон со скриншота
             emailjs.send('service_30yvfar', 'template_yn8ritn', params)
                 .then(() => {
                     closeModal();
-                    showBotSuccess(); // Тот самый бот поздоровается
+                    showBotSuccess();
                     document.getElementById('forumForm').reset();
                 })
                 .catch(err => {
-                    alert("Ошибка отправки! Убедитесь, что нажали Save в EmailJS. Тех. ошибка: " + err.text);
-                    console.error(err);
+                    alert("Ошибка отправки! Убедитесь, что нажали Save в EmailJS.");
                 })
                 .finally(() => {
-                    btn.innerText = "ОТПРАВИТЬ ТЕМУ";
+                    btn.innerText = "ОТПРАВИТЬ";
                     btn.disabled = false;
                 });
         };
 
-        // Сообщение от бота Александровск
         function showBotSuccess() {
             const notify = document.createElement('div');
             notify.style = `
@@ -163,21 +158,18 @@
                 max-width: 350px; animation: slideIn 0.5s ease-out;
             `;
             notify.innerHTML = `
-                <div style="font-weight:700; color:#3b82f6; margin-bottom:8px; font-size: 16px;">✉️ СЛУЖБА ПОДДЕРЖКИ</div>
+                <div style="font-weight:700; color:#3b82f6; margin-bottom:8px; font-size: 16px;">✉️ БОТ ПОДДЕРЖКИ</div>
                 <div style="font-size:14px; line-height: 1.5;">
                     Привет, подписчик! Рад, что ты связался с нами. Твоя тема принята.<br><br>
-                    Проверь почту — <strong>botalexandrovsksupport@gmail.com</strong> уже отправил тебе ответ.
+                    Проверь почту — <strong>botalexandrovsksupport@gmail.com</strong> уже отправил тебе ответ с инструкциями.
                 </div>
                 <div style="margin-top:15px; font-size:12px; font-weight:600; opacity:0.8;">
                     С уважением,<br>Александровск
                 </div>
             `;
             document.body.appendChild(notify);
-            
-            // Скрыть через 10 секунд
             setTimeout(() => { 
                 notify.style.opacity='0'; 
-                notify.style.transform = 'translateX(-20px)';
                 notify.style.transition = '0.5s';
                 setTimeout(()=>notify.remove(), 500); 
             }, 10000);
@@ -185,6 +177,7 @@
     </script>
 </body>
 </html>
+
 
 
 
