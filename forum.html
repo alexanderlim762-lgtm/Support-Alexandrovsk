@@ -4,32 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Форум поддержки — Архивы ААО</title>
-    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root { --primary: #3b82f6; --dark: #1e293b; --bg: #f8fafc; }
-        
-        body { 
-            font-family: 'Montserrat', sans-serif; 
-            background-color: var(--bg); 
-            margin: 0; 
-            color: #334155; 
-            overflow-x: hidden;
-        }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg); margin: 0; color: #334155; }
 
-        /* Шапка форума */
         .forum-header {
             background: linear-gradient(135deg, var(--dark) 0%, #334155 100%);
-            color: white; padding: 80px 20px; text-align: center; position: relative;
+            color: white; padding: 60px 20px; text-align: center; position: relative;
         }
-
-        .forum-header h1 { font-size: 32px; margin: 0; }
-        .forum-header p { opacity: 0.8; margin-top: 10px; }
 
         .container { max-width: 1000px; margin: -40px auto 50px; padding: 0 20px; }
 
-        /* Карточка контента */
         .forum-card {
             background: white; border-radius: 24px; padding: 35px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
@@ -43,11 +30,6 @@
         }
 
         .btn-create:hover { background: #2563eb; transform: translateY(-2px); }
-
-        /* Темы */
-        .topic-placeholder {
-            text-align: center; padding: 40px; color: #94a3b8; border: 2px dashed #e2e8f0; border-radius: 20px;
-        }
 
         /* Модальное окно */
         .modal {
@@ -63,17 +45,16 @@
 
         @keyframes modalAnim { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-        .form-group { margin-bottom: 18px; text-align: left; }
+        .form-group { margin-bottom: 15px; text-align: left; }
         .form-group label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 8px; color: var(--dark); }
         .form-group input, .form-group textarea {
             width: 100%; padding: 14px; border: 1.5px solid #e2e8f0; border-radius: 12px;
-            font-family: 'Montserrat'; box-sizing: border-box; font-size: 14px; outline: none;
+            font-family: 'Montserrat'; box-sizing: border-box; font-size: 14px;
         }
-        .form-group input:focus, .form-group textarea:focus { border-color: var(--primary); }
 
         .btn-submit {
             width: 100%; padding: 16px; background: var(--primary); color: white;
-            border: none; border-radius: 12px; font-weight: 700; cursor: pointer; margin-top: 10px; font-size: 16px;
+            border: none; border-radius: 12px; font-weight: 700; cursor: pointer; margin-top: 10px;
         }
 
         .close { position: absolute; top: 20px; right: 20px; font-size: 24px; cursor: pointer; color: #94a3b8; }
@@ -86,7 +67,7 @@
 
     <header class="forum-header">
         <h1>Служба поддержки ААО</h1>
-        <p>Архивы Александровского АО — Официальный Форум</p>
+        <p>Архивы Александровского АО — Форум</p>
     </header>
 
     <div class="container">
@@ -95,11 +76,10 @@
                 <h2>Обсуждения</h2>
                 <button class="btn-create" onclick="openModal()">+ Создать тему</button>
             </div>
-
             <div id="topicsList">
-                <div class="topic-placeholder">
-                    <p>Пока обсуждений нет. Ваша тема может стать первой!</p>
-                </div>
+                <p style="color:#94a3b8; text-align:center; padding: 40px; border: 2px dashed #f1f5f9; border-radius: 20px;">
+                    Темы пока отсутствуют. Ваше обращение будет первым!
+                </p>
             </div>
         </div>
     </div>
@@ -111,19 +91,19 @@
             <form id="forumForm">
                 <div class="form-group">
                     <label>Никнейм YouTube (обязательно)</label>
-                    <input type="text" id="yt_nick" placeholder="Напр. Alexander_Show" required>
+                    <input type="text" id="yt_nick" placeholder="Ваш ник" required>
                 </div>
                 <div class="form-group">
-                    <label>Ваш Email (обязательно для ответа)</label>
+                    <label>Ваша эл. почта (обязательно для ответа)</label>
                     <input type="email" id="user_email" placeholder="example@mail.com" required>
                 </div>
                 <div class="form-group">
                     <label>Название темы (обязательно)</label>
-                    <input type="text" id="topic_title" placeholder="Краткая суть вопроса" required>
+                    <input type="text" id="topic_title" placeholder="Суть вопроса" required>
                 </div>
                 <div class="form-group">
                     <label>Описание темы (обязательно)</label>
-                    <textarea id="topic_desc" rows="4" placeholder="Подробно расскажите о вашей проблеме..." required></textarea>
+                    <textarea id="topic_desc" rows="4" placeholder="Опишите проблему..." required></textarea>
                 </div>
                 <button type="submit" class="btn-submit" id="submitBtn">ОТПРАВИТЬ ТЕМУ</button>
             </form>
@@ -132,38 +112,38 @@
 
     <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
-        // Инициализация твоим Public Key
+        // Инициализация твоим ключом
         (function(){ emailjs.init("JWSQbjgGfa9-P-rfq"); })();
 
         function openModal() { document.getElementById('modal').style.display = 'flex'; }
         function closeModal() { document.getElementById('modal').style.display = 'none'; }
 
-        // Обработка отправки
         document.getElementById('forumForm').onsubmit = function(e) {
             e.preventDefault();
-            
             const btn = document.getElementById('submitBtn');
+            const userEmail = document.getElementById('user_email').value;
+
             btn.innerText = "ОТПРАВКА...";
             btn.disabled = true;
 
-            // Названия переменных (name, email, title, message) как в твоем шаблоне vlcv9ma
+            // Сопоставляем поля с твоим шаблоном
             const params = {
-                name: document.getElementById('yt_nick').value,
-                email: document.getElementById('user_email').value,
-                title: document.getElementById('topic_title').value,
-                message: document.getElementById('topic_desc').value
+                name: document.getElementById('yt_nick').value,     
+                email: userEmail, 
+                title: document.getElementById('topic_title').value, 
+                message: document.getElementById('topic_desc').value 
             };
 
-            // Твой Service ID: service_30yvfar
-            // Твой Template ID: vlcv9ma
-            emailjs.send('service_30yvfar', 'vlcv9ma', params)
+            // service_30yvfar — твой сервис
+            // template_yn8ritn — твой правильный шаблон со скриншота
+            emailjs.send('service_30yvfar', 'template_yn8ritn', params)
                 .then(() => {
                     closeModal();
-                    showBotMessage(); // Показываем сообщение от бота Александровск
+                    showBotSuccess(); // Тот самый бот поздоровается
                     document.getElementById('forumForm').reset();
                 })
                 .catch(err => {
-                    alert("Произошла ошибка при отправке. Убедитесь, что шаблон 'vlcv9ma' активен.");
+                    alert("Ошибка отправки! Убедитесь, что нажали Save в EmailJS. Тех. ошибка: " + err.text);
                     console.error(err);
                 })
                 .finally(() => {
@@ -172,8 +152,8 @@
                 });
         };
 
-        // Сообщение от бота в углу экрана
-        function showBotMessage() {
+        // Сообщение от бота Александровск
+        function showBotSuccess() {
             const notify = document.createElement('div');
             notify.style = `
                 position: fixed; bottom: 20px; left: 20px; 
@@ -184,9 +164,9 @@
             `;
             notify.innerHTML = `
                 <div style="font-weight:700; color:#3b82f6; margin-bottom:8px; font-size: 16px;">✉️ СЛУЖБА ПОДДЕРЖКИ</div>
-                <div style="font-size:14px; line-height:1.5;">
+                <div style="font-size:14px; line-height: 1.5;">
                     Привет, подписчик! Рад, что ты связался с нами. Твоя тема принята.<br><br>
-                    Проверь почту — <strong>botalexandrovsksupport@gmail.com</strong> уже отправил тебе инструкции.
+                    Проверь почту — <strong>botalexandrovsksupport@gmail.com</strong> уже отправил тебе ответ.
                 </div>
                 <div style="margin-top:15px; font-size:12px; font-weight:600; opacity:0.8;">
                     С уважением,<br>Александровск
@@ -194,16 +174,17 @@
             `;
             document.body.appendChild(notify);
             
-            // Уведомление исчезает через 10 секунд
+            // Скрыть через 10 секунд
             setTimeout(() => { 
-                notify.style.opacity = '0'; 
+                notify.style.opacity='0'; 
                 notify.style.transform = 'translateX(-20px)';
                 notify.style.transition = '0.5s';
-                setTimeout(() => notify.remove(), 500); 
+                setTimeout(()=>notify.remove(), 500); 
             }, 10000);
         }
     </script>
 </body>
 </html>
+
 
 
